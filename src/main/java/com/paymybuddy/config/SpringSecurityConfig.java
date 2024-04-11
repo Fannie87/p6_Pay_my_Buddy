@@ -46,7 +46,7 @@ public class SpringSecurityConfig {
 				.formLogin() //
 				.loginPage("/login") //
 				.loginProcessingUrl("/perform_login") //
-				.defaultSuccessUrl("/homepage.html", true) //
+				.defaultSuccessUrl("/home", true) //
 				// .failureUrl("/login.html?error=true")
 //	            .failureHandler(authenticationFailureHandler())
 				.and() //

@@ -19,10 +19,8 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(final ViewControllerRegistry registry) {
 
-        registry.addViewController("/anonymous.html");
         registry.addViewController("/login");
-        registry.addViewController("/homepage.html");
-        registry.addViewController("/admin/adminpage.html");
+        registry.addViewController("/home");
         registry.addViewController("/accessDenied");
     }
 
