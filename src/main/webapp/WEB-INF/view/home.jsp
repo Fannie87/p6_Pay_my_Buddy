@@ -20,7 +20,8 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="#">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Transfer</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">Profile</a>
@@ -31,7 +32,36 @@
 			</div>
 		</div>
 	</nav>
-
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Connections</th>
+				<th scope="col">Description</th>
+				<th scope="col">Amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th scope="row">1</th>
+				<td>Hayley</td>
+				<td>Restaurant bill share</td>
+				<td>10€</td>
+			</tr>
+			<tr>
+				<th scope="row">2</th>
+				<td>Clara</td>
+				<td>Trip money</td>
+				<td>25€</td>
+			</tr>
+			<tr>
+				<th scope="row">3</th>
+				<td>Larry the Bird</td>
+				<td>Movie tickets</td>
+				<td>8€</td>
+			</tr>
+		</tbody>
+	</table>
 
 	<div class="container">
 		<h1>Homepage, Welcome.</h1>
