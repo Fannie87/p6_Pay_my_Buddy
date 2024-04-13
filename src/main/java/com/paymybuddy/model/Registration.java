@@ -1,21 +1,13 @@
 package com.paymybuddy.model;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-
 public class Registration {
 	
-	@NotBlank
 	private String firstName;
 	
-	@NotBlank
 	private String lastName;
 	
-	@NotBlank
 	private String mail;
 	
-	@NotBlank
-	@Pattern(regexp= "^(.+)@(\\S+)$")
 	private String password;
 
 	public String getFirstName() {

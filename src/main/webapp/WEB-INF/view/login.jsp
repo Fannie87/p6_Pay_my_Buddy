@@ -59,7 +59,7 @@
 		</div>
 			<input type="submit" class="btn btn-primary" value="Login"/>
 		<div class="input mt-3">
-			<button type="button" class="btn btn-secondary">Registration</button>
+			<a type="button" class="btn btn-secondary" href="registration">Registration</a>
 		</div>
 
 	</form>

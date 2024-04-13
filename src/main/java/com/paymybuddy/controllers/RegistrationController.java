@@ -24,13 +24,17 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "/registration-success", method = RequestMethod.POST)
-	public ModelAndView submit(@ModelAttribute("registration") Registration registration, BindingResult result, ModelMap model) {
+	public String submit(@ModelAttribute("registration") Registration registration, BindingResult result, ModelMap model) {
+		
+		if(registration.getFirstName().isBlank())
+			result.rejectValue("firstName", null, "Merci de remplir le champ");
 		
 		if (result.hasErrors())
-			return new ModelAndView("registration");
+			return "registration";
 		dBUserRepository.createUser(registration);
-		
-		return new ModelAndView("registration-success", "registration", registration);
+		return "registration";
+
+//		return new ModelAndView("registration-success", "registration", registration);
 	}
 	
 }

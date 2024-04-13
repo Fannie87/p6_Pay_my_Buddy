@@ -22,8 +22,8 @@
 				<td>${registration.lastName}</td>
 			</tr>
 			<tr>
-				<td>Email</td>
-				<td>${registration.email}</td>
+				<td>Mail</td>
+				<td>${registration.mail}</td>
 			</tr>
 			<tr>
 				<td>Password</td>
