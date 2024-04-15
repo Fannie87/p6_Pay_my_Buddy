@@ -1,5 +1,7 @@
 package com.paymybuddy.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,6 +17,7 @@ import com.paymybuddy.repository.DBUserRepository;
 
 @Controller
 public class RegistrationController {
+	
 	@Autowired
 	private DBUserRepository dBUserRepository;
 
@@ -24,17 +27,31 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "/registration-success", method = RequestMethod.POST)
-	public String submit(@ModelAttribute("registration") Registration registration, BindingResult result, ModelMap model) {
+	public String submit(@ModelAttribute("registration") Registration registration, BindingResult result, ModelMap model, HttpSession session) {
 		
 		if(registration.getFirstName().isBlank())
-			result.rejectValue("firstName", null, "Merci de remplir le champ");
+			result.rejectValue("firstName", null, "Please enter your first name in this field");
+
+		if(registration.getLastName().isBlank())
+			result.rejectValue("lastName", null, "Please enter your last name in this field");
+		
+		if(registration.getMail().isBlank())
+			result.rejectValue("mail", null, "Please enter your mail in this field");
+		
+		if(registration.getPassword().isBlank())
+			result.rejectValue("password", null, "Please enter your password in this field");
 		
 		if (result.hasErrors())
 			return "registration";
 		dBUserRepository.createUser(registration);
-		return "registration";
-
-//		return new ModelAndView("registration-success", "registration", registration);
+		session.setAttribute("registration", registration);
+		return "redirect:registration-success";
 	}
 	
+	@RequestMapping(value = "/registration-success", method = RequestMethod.GET)
+	public ModelAndView showRegistrationSucces(HttpSession session) {
+		Registration registration = (Registration)  session.getAttribute("registration");
+		return new ModelAndView("registration-success", "registration", registration);
+	}
+
 }

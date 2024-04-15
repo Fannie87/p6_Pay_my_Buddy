@@ -6,30 +6,21 @@
 	rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
-
 </head>
-<body>
-	<div class="container">
-		<button type="button" class="btn btn-success">Pay My Buddy</button>
-		<h1>Congratulation, you're registrated!</h1>
-		<table class="table">
-			<tr>
-				<td>First Name</td>
-				<td>${registration.firstName}</td>
-			</tr>
-			<tr>
-				<td>Last Name</td>
-				<td>${registration.lastName}</td>
-			</tr>
-			<tr>
-				<td>Mail</td>
-				<td>${registration.mail}</td>
-			</tr>
-			<tr>
-				<td>Password</td>
-				<td>${registration.password}</td>
-			</tr>
-		</table>
+<body class="container text-center">
+	<button type="button" class="btn btn-success">Pay My Buddy</button>
+	<div class="row justify-content-center">
+		
+		<h1 class="m-6">Congratulation, you're registrated!</h1>
+					
+		<h4 class="m-3">First Name</h4>
+		<p>${registration.firstName}</p>
+	
+		<h4 class="m-3">Last Name</h4>
+		<p>${registration.lastName}</p>
+	
+		<h4 class="m-3">Mail</h4>
+		<p>${registration.mail}</p>
 	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

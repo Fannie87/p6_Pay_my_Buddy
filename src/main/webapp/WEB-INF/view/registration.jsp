@@ -23,7 +23,8 @@
 				<div class="col-2"></div>
             	<form:label for="lastName" class="col-sm-2 col-form-label" path="lastName">Last Name</form:label>
 				<div class="col-sm-4">
-               		<form:input class="form-control" path="lastName"/>
+               		<form:input class="form-control" path="lastName" cssErrorClass="form-control is-invalid"/>
+               		<form:errors path = "lastName" id="lastName" cssClass = "invalid-feedback" />
               	</div>
 			</div>
 				
@@ -31,7 +32,8 @@
             	<div class="col-2"></div>
                 <form:label for="mail" class="col-sm-2 col-form-label" path="mail">Mail</form:label>
                	<div class="col-sm-4">
-               		<form:input class="form-control" path="mail"/>
+               		<form:input class="form-control" path="mail" cssErrorClass="form-control is-invalid"/>
+               		<form:errors path = "mail" id="mail" cssClass = "invalid-feedback" />
                	</div>
              </div>
               
@@ -39,7 +41,8 @@
 				<div class="col-2"></div>
                 <form:label for="password" class="col-sm-2 col-form-label" path="password">Password</form:label>
                	<div class="col-sm-4">
-               		<form:input class="form-control" path="password"/>
+               		<form:input class="form-control" path="password" cssErrorClass="form-control is-invalid"/>
+               		<form:errors path = "password" id="password" cssClass = "invalid-feedback" />
                	</div>
             </div>
                     
