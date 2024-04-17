@@ -17,7 +17,6 @@ public class DBUserRepository {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
