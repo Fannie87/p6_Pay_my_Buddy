@@ -1,4 +1,4 @@
-package com.paymybuddy.model;
+	package com.paymybuddy.model;
 
 public class Registration {
 	

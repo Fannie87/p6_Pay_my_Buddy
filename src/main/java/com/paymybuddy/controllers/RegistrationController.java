@@ -16,11 +16,11 @@ import com.paymybuddy.repository.DBUserRepository;
 
 
 @Controller
-public class RegistrationController {
+public class RegistrationController {  
 	
-	@Autowired
+	@Autowired 
 	private DBUserRepository dBUserRepository;
-
+ 
 	@GetMapping(value = "/registration")
 	public ModelAndView showRegistration() {
 		return new ModelAndView("registration", "registration", new Registration());

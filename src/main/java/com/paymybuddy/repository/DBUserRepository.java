@@ -12,8 +12,7 @@ import com.paymybuddy.dao.DBUser;
 import com.paymybuddy.model.Registration;
 
 @Repository
-public class DBUserRepository {
-
+public class DBUserRepository { 
 	@PersistenceContext
 	private EntityManager entityManager;
 
