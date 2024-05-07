@@ -51,8 +51,8 @@
 			<div class="col-5"></div>
 			<div class="col-4">
 				<div class="input-group">
-				<input type="checkbox" class="form-check-input" id="exampleCheck1">
-				<label class="form-check-label ms-2" for="exampleCheck1">Remember me</label>
+				<input type="checkbox" class="form-check-input" id="remember-me" name="remember-me">
+				<label class="form-check-label ms-2" for="remember-me">Remember me</label>
 			</div>
 		</div>
 		</div>

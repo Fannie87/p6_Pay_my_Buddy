@@ -19,6 +19,8 @@ public class DBUser {
 	
 	private String lastName;
 
+	private Float balance;
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -57,6 +59,14 @@ public class DBUser {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	public Float getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Float balance) {
+		this.balance = balance;
 	}
 
 }

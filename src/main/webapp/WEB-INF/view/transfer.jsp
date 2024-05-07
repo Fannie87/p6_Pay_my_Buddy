@@ -13,8 +13,8 @@
 	<jsp:include page="layout/nav.jsp" />  
 
 	<div class="container">
-        <h1 class="text-center">Transfer your money to Pay my Buddy.</h1>
-       	<form:form method="POST" action="/nameAccount" modelAttribute="pay">
+        <h1 class="text-center">Transfer your money to your friends.</h1>
+       	<form:form method="POST" action="/transfer-success" modelAttribute="pay">
        	<div class="mb-3 row">
            	<div class="col-sm-8"><legend>Send money</legend></div>
   	            <div class="col-sm-2"><a href="connection" class="btn btn-primary">Add Connection</a></div>
@@ -22,10 +22,13 @@
 			<div class="mb-3 row">
 				<div class="col-sm-4">
 				<form:select path="connection" class="form-select" aria-label="Default select example">
-					<option selected>Select a connection</option>
-					<option value="1">One</option>
-					<option value="2">Two</option>
-					<option value="3">Three</option>
+				    <form:option value="NONE"> --Select account--</form:option>
+					<form:options items="${listOfInstitutionsNames}"></form:options>
+				
+<!-- 					<option selected>Select a connection</option> -->
+<!-- 					<option value="1">One</option> -->
+<!-- 					<option value="2">Two</option> -->
+<!-- 					<option value="3">Three</option> -->
 					<form:errors path = "connection" id="connection" cssClass = "invalid-feedback" />
 				</form:select>
 				</div>

@@ -1,10 +1,25 @@
 package com.paymybuddy.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+//Entity = table + son nom
+@Entity(name = "account")
 public class Account {
+	@Id //=clé primaire
+	private Integer idAccount;
 	private Integer idUser;
 	private String iban;
 	private String bic;
 	private String nameAccount;
+ 
+	public Integer getIdAccount() {
+		return idAccount;
+	}
+
+	public void setIdAccount(Integer idAccount) {
+		this.idAccount = idAccount;
+	}
 
 	public String getIban() {
 		return iban;

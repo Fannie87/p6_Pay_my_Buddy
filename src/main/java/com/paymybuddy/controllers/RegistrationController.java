@@ -41,7 +41,7 @@ public class RegistrationController {
 		if(registration.getPassword().isBlank())
 			result.rejectValue("password", null, "Please enter your password in this field");
 		
-		if (result.hasErrors())
+		if (result.hasErrors()) 
 			return "registration";
 		
 		

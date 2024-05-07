@@ -43,10 +43,14 @@ public class SpringSecurityConfig {
 				.anyRequest() //
 				.authenticated() //
 				.and() //
-				.formLogin() //
-				.loginPage("/login") //
-				.loginProcessingUrl("/perform_login") //
-				.defaultSuccessUrl("/home", true) //
+					.formLogin() //
+					.loginPage("/login") //
+					.loginProcessingUrl("/perform_login") //
+					.defaultSuccessUrl("/home", true) //
+				.and()
+					.rememberMe()
+					.key("eIxQfAVsVz")
+					.userDetailsService(customUserDetailsService)
 				// .failureUrl("/login.html?error=true")
 //	            .failureHandler(authenticationFailureHandler())
 				.and() //

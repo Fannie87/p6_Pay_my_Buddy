@@ -3,7 +3,7 @@ package com.paymybuddy.model;
 public class Pay {
 	private Integer idUser;
 	private String connection;
-	private Integer amount;
+	private Float amount;
 
 	public Integer getIdUser() {
 		return idUser;
@@ -13,11 +13,11 @@ public class Pay {
 		this.idUser = idUser;
 	} 
 
-	public Integer getAmount() {      
+	public Float getAmount() {      
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {  
+	public void setAmount(Float amount) {  
 		this.amount = amount;
 	}
 

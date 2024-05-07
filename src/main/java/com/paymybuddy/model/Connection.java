@@ -9,7 +9,7 @@ public class Connection {
 	}
 
 	public void setMail(String mail) {
-		this.mail = mail;
+		this.mail = mail; 
 	}
 	
 

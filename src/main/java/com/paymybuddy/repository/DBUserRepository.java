@@ -28,7 +28,7 @@ public class DBUserRepository {
 	
 	@Transactional
 	public void createUser(Registration registration) {
-		String query = " INSERT INTO dbuser(mail, password, firstName, lastName) VALUES (?,?,?,?)";
+		String query = " INSERT INTO dbuser(mail, password, first_name, last_name) VALUES (?,?,?,?)";
 
 		entityManager //
 				.createNativeQuery(query) //
@@ -38,5 +38,26 @@ public class DBUserRepository {
 				.setParameter(4, registration.getLastName()) //
 				.executeUpdate();
 	}
+	
+	public Float getBalance (Integer idUser) {
+		String query = "SELECT balance FROM dbuser WHERE id = ?";
+		return (Float) entityManager //
+				.createNativeQuery(query) //
+				.setParameter(1, idUser) //
+				.getSingleResult();
+	}
+	
+	
+	@Transactional
+	public void loadBalance(Integer idUser, Float balance) {
+		String query = " UPDATE dbuser SET balance = ? WHERE id = ?";
+
+		entityManager //
+				.createNativeQuery(query) //
+				.setParameter(1, balance) //
+				.setParameter(2, idUser)
+				.executeUpdate();
+	}
+	
 
 }
