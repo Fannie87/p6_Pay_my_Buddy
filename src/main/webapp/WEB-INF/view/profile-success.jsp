@@ -11,6 +11,15 @@
 <body>
 	<jsp:include page="layout/nav.jsp" />  
 
+	<div class="container">
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="home">Home</a></li>
+		    <li class="breadcrumb-item" aria-current="page"><a href="profile">Profile</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Profile Success</li>
+		  </ol>
+		</nav>
+	</div>
     <h3 class="text-center">Congratulations, your new balance is ${sessionScope.balance} euro(s).</h3>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

@@ -12,38 +12,13 @@
 	<jsp:include page="layout/nav.jsp" />  
 
 	<div class="container">
-	<h1>Homepage, Welcome.</h1>
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item active" >Home</li>
+		  </ol>
+		</nav>	
+		<h1>Homepage, Welcome.</h1>
 	</div>
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">Connections</th>
-				<th scope="col">Description</th>
-				<th scope="col">Amount</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<th scope="row">1</th>
-				<td>Hayley</td>
-				<td>Restaurant bill share</td>
-				<td>10€</td>
-			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>Clara</td>
-				<td>Trip money</td>
-				<td>25€</td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>Larry the Bird</td>
-				<td>Movie tickets</td>
-				<td>8€</td>
-			</tr>
-		</tbody>
-	</table>
 
 
 	<script

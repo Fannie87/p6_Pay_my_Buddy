@@ -29,11 +29,21 @@ public class AccountRepository {
 				.executeUpdate();
 	}
 
-	public List<Account> getAccounts(Integer idUser) {
+	public List<Account> getAccountsFromIdUser(Integer idUser) {
 		String query = "SELECT * from account WHERE id_user= ?";
 		return entityManager //
 				.createNativeQuery(query , Account.class) //
 				.setParameter(1, idUser) //
 				.getResultList();
 	}
+	
+	public Account getAccountFromId(String idAccount) {
+		String query = "SELECT * from account WHERE id_account= ?";
+		return (Account) entityManager //
+				.createNativeQuery(query , Account.class) //
+				.setParameter(1, idAccount) //
+				.getSingleResult();
+	}
+	
+	
 }

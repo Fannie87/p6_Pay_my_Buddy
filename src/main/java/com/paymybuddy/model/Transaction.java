@@ -1,50 +1,34 @@
 package com.paymybuddy.model;
 
 public class Transaction {
-	public Integer idTrade;
-	public Integer idUser;
-	public Integer idFriend;
-	public String description;
-	public Float amount;
-
+	private Integer idTrade;
+	private String friend; 
+	private String description;
+	private Float amount;
 	public Integer getIdTrade() {
 		return idTrade;
 	}
-
 	public void setIdTrade(Integer idTrade) {
 		this.idTrade = idTrade;
 	}
-
-	public Integer getIdUser() {
-		return idUser;
+	public String getFriend() {
+		return friend;
 	}
-
-	public void setIdUser(Integer idUser) {
-		this.idUser = idUser;
+	public void setFriend(String friend) {
+		this.friend = friend;
 	}
-
-	public Integer getIdFriend() {
-		return idFriend;
-	}
-
-	public void setIdFriend(Integer idFriend) {
-		this.idFriend = idFriend;
-	}
-
 	public String getDescription() {
 		return description;
 	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 	public Float getAmount() {
 		return amount;
 	}
-
 	public void setAmount(Float amount) {
 		this.amount = amount;
 	}
+
 
 }

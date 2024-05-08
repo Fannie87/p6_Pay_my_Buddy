@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.paymybuddy.model.Transaction;
+import com.paymybuddy.dao.TransactionDAO;
 
 @Repository
 public class TransactionRepository {
@@ -17,7 +17,7 @@ public class TransactionRepository {
 	private EntityManager entityManager;
 	
 	@Transactional
-	public void createTransaction (Transaction transaction) {
+	public void createTransaction (TransactionDAO transaction) {
 		String query = "INSERT INTO transaction(id_user, id_friend, description, amount) VALUES (?,?,?,?)";
 
 		entityManager //
@@ -30,15 +30,12 @@ public class TransactionRepository {
 	}
 	
 	@Transactional
-	public List<Transaction> getTransactionFromIdUser (Integer idUser) {
+	public List<TransactionDAO> getTransactionsFromIdUser (Integer idUser) {
 		String query = "SELECT * from transaction WHERE id_user= ?";
-
-		List resultList = entityManager //
-				.createNativeQuery(query, Transaction.class) //
+		return entityManager //
+				.createNativeQuery(query, TransactionDAO.class) //
 				.setParameter(1, idUser) //
 				.getResultList();
-		
-		return null;
 	}
 
 	

@@ -12,6 +12,14 @@
 	<jsp:include page="layout/nav.jsp" />  
 
 	<div class="container">
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="home">Home</a></li>
+		    <li class="breadcrumb-item"><a href="transfer">Transfer</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Transfer Success</li>
+		  </ol>
+		</nav>
+	</div>
         <h3 class="text-center">Congratulations, your bank account has been created with success.</h3>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

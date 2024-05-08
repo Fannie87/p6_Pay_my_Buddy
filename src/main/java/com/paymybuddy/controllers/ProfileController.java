@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.paymybuddy.dao.DBUser;
+import com.paymybuddy.dao.TransactionDAO;
 import com.paymybuddy.model.Account;
 import com.paymybuddy.model.ProfileAmount;
-import com.paymybuddy.model.Transaction;
 import com.paymybuddy.repository.AccountRepository;
 import com.paymybuddy.repository.DBUserRepository;
 import com.paymybuddy.repository.TransactionRepository;
@@ -43,7 +43,7 @@ public class ProfileController {
 		String mail = request.getUserPrincipal().getName();
 
 		DBUser dBUser = dBUserRepository.findByMail(mail);
-		List<Account> accounts = accountRepository.getAccounts(dBUser.getId());
+		List<Account> accounts = accountRepository.getAccountsFromIdUser(dBUser.getId());
 
 		Map<String, String> mapAccounts = new HashMap<String, String>();
 		for (Account account : accounts) {
@@ -51,7 +51,6 @@ public class ProfileController {
 		}
 
 		request.getSession().setAttribute("mapAccounts", mapAccounts);
-
 		request.getSession().setAttribute("balance", dBUser.getBalance());
 
 		return "profile";
@@ -92,10 +91,11 @@ public class ProfileController {
 		// Solde en cours + solde saisi = solde actualisé
 		Float inputBalance = Float.parseFloat(profileAmountSupply.getBalance());
 		dBUserRepository.loadBalance(dBUser.getId(), balanceAmount + inputBalance);
-		
-		Transaction transaction = new Transaction();
+		String nameAccount = accountRepository.getAccountFromId(profileAmountSupply.getIdAccount()).getNameAccount();
+
+		TransactionDAO transaction = new TransactionDAO();
 		transaction.setAmount(inputBalance);
-		transaction.setDescription("Load balance from your own account.");
+		transaction.setDescription("Load balance from your own account. account : " + nameAccount);
 		transaction.setIdFriend(dBUser.getId());
 		transaction.setIdUser(dBUser.getId());
 		transactionRepository.createTransaction(transaction);
@@ -144,10 +144,11 @@ public class ProfileController {
 		// Solde en cours + solde saisi = solde actualisé
 		Float inputBalance = Float.parseFloat(profileAmountDebit.getBalance());
 		dBUserRepository.loadBalance(dBUser.getId(), balanceAmount - inputBalance);
+		String nameAccount = accountRepository.getAccountFromId(profileAmountDebit.getIdAccount()).getNameAccount();
 		
-		Transaction transaction = new Transaction();
+		TransactionDAO transaction = new TransactionDAO();
 		transaction.setAmount(inputBalance);
-		transaction.setDescription("Debit balance from Pay my Buddy.");
+		transaction.setDescription("Debit balance from Pay my Buddy. account : " + nameAccount);
 		transaction.setIdFriend(dBUser.getId());
 		transaction.setIdUser(dBUser.getId());
 		transactionRepository.createTransaction(transaction);

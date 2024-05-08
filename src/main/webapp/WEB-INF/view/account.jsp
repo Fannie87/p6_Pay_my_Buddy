@@ -12,6 +12,12 @@
 	<jsp:include page="layout/nav.jsp" />  
 
 	<div class="container">
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="home">Home</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Account</li>
+		  </ol>
+		</nav>
         <h1 class="text-center">Add your bank account</h1>
         <form:form method="POST" action="/addAccount" modelAttribute="account">
 	

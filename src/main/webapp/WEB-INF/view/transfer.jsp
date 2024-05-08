@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -13,6 +14,12 @@
 	<jsp:include page="layout/nav.jsp" />  
 
 	<div class="container">
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="home">Home</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Transfer</li>
+		  </ol>
+		</nav>
         <h1 class="text-center">Transfer your money to your friends.</h1>
        	<form:form method="POST" action="/transfer-success" modelAttribute="pay">
        	<div class="mb-3 row">
@@ -23,12 +30,7 @@
 				<div class="col-sm-4">
 				<form:select path="connection" class="form-select" aria-label="Default select example">
 				    <form:option value="NONE"> --Select account--</form:option>
-					<form:options items="${listOfInstitutionsNames}"></form:options>
-				
-<!-- 					<option selected>Select a connection</option> -->
-<!-- 					<option value="1">One</option> -->
-<!-- 					<option value="2">Two</option> -->
-<!-- 					<option value="3">Three</option> -->
+					<form:options items="${friendList}"></form:options>
 					<form:errors path = "connection" id="connection" cssClass = "invalid-feedback" />
 				</form:select>
 				</div>
@@ -41,6 +43,26 @@
 	         	</div>
 			</div>
 		</form:form>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Connections</th>
+					<th scope="col">Description</th>
+					<th scope="col">Amount</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="transaction" items="${sessionScope.transactions}" >
+					<tr>
+						<th scope="row">${transaction.idTrade}</th>
+						<td>${transaction.friend}</td>
+						<td>${transaction.description}</td>
+						<td>${transaction.amount} &#x20AC;</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

@@ -11,6 +11,12 @@
 	<jsp:include page="layout/nav.jsp" />
 
 	<div class="container">
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="home">Home</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Connection</li>
+		  </ol>
+		</nav>	
 		<h1 class="text-center">Add a connection</h1>
 		<form:form method="POST" action="/connection" modelAttribute="connection">
 			<div class="mb-3 row">

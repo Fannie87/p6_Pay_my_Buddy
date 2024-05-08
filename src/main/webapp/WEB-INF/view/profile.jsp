@@ -11,9 +11,14 @@
 </head>
 <body>
 	<jsp:include page="layout/nav.jsp" />  
-
 	<div class="container">
-	<br/>
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="home">Home</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+		  </ol>
+		</nav>
+		<br/>
 		<h3> Your current balance is ${sessionScope.balance} euro(s).</h3>
 	
 		<br>
@@ -21,7 +26,7 @@
        	<form:form method="POST" action="/supply-success" modelAttribute="profileAmountSupply">
 			<div class="mb-3 row">
 				<div class="col-sm-4">
-				<form:select path="idAccount" class="form-select" aria-label="Default select example" cssErrorClass="form-control is-invalid">
+				<form:select path="idAccount" class="form-select" cssErrorClass="form-select is-invalid">
 				    <form:option value="NONE"> --Select Account--</form:option>
 					<form:options items="${sessionScope.mapAccounts}"></form:options>
 				</form:select>
@@ -41,11 +46,11 @@
 			<h3>Debit your money to your bank account</h3>
 			<div class="mb-3 row">
 				<div class="col-sm-4">
-				<form:select path="idAccount" class="form-select" aria-label="Default select example">
+				<form:select path="idAccount" class="form-select"  cssErrorClass="form-select is-invalid">
 				    <form:option value="NONE"> --Select Account--</form:option>
-					<form:options items="${mapAccounts}"></form:options>
-					<form:errors path = "idAccount" id="idAccount" cssClass = "invalid-feedback" />
+					<form:options items="${sessionScope.mapAccounts}"></form:options>
 				</form:select>
+				<form:errors path = "idAccount" id="idAccount" cssClass = "invalid-feedback" />
 				</div>
 				<div class="col-sm-4">
               		<form:input class="form-control" path="balance" cssErrorClass="form-control is-invalid" placeholder="0" />

@@ -39,7 +39,7 @@ public class DBUserRepository {
 				.executeUpdate();
 	}
 	
-	public Float getBalance (Integer idUser) {
+	public Float getBalance(Integer idUser) {
 		String query = "SELECT balance FROM dbuser WHERE id = ?";
 		return (Float) entityManager //
 				.createNativeQuery(query) //
@@ -47,6 +47,13 @@ public class DBUserRepository {
 				.getSingleResult();
 	}
 	
+	public DBUser getUserById(Integer idUser) {
+		String query = "SELECT * FROM dbuser WHERE id = ?";
+		return  (DBUser) entityManager //
+				.createNativeQuery(query, DBUser.class) //
+				.setParameter(1, idUser) //
+				.getSingleResult();
+	}
 	
 	@Transactional
 	public void loadBalance(Integer idUser, Float balance) {

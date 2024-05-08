@@ -11,6 +11,13 @@
 	<jsp:include page="layout/nav.jsp" />
 
 	<div class="container">
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="home">Home</a></li>
+		    <li class="breadcrumb-item"><a href="connection">Connection</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Connection Success</li>
+		  </ol>
+		</nav>	
 		<h1 class="text-center">Add a connection - succeess</h1>
 	<div class="row justify-content-center">
 		
