@@ -2,6 +2,7 @@ package com.paymybuddy.controllers;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,16 +31,20 @@ public class RegistrationController {
 	public String submit(@ModelAttribute("registration") Registration registration, BindingResult result, ModelMap model, HttpSession session) {
 		
 		if(registration.getFirstName().isBlank())
-			result.rejectValue("firstName", null, "Please enter your first name in this field");
+			result.rejectValue("firstName", null, "Please input your first name in this field");
 
 		if(registration.getLastName().isBlank())
-			result.rejectValue("lastName", null, "Please enter your last name in this field");
+			result.rejectValue("lastName", null, "Please input your last name in this field");
 		
 		if(registration.getMail().isBlank())
-			result.rejectValue("mail", null, "Please enter your mail in this field");
+			result.rejectValue("mail", null, "Please input your mail in this field");
 		
 		if(registration.getPassword().isBlank())
-			result.rejectValue("password", null, "Please enter your password in this field");
+			result.rejectValue("password", null, "Please input your password in this field");
+		else if(!EmailValidator.getInstance().isValid(registration.getMail()))
+			result.rejectValue("mail", null, "The mail format is not good. ex : test@gmail.com");
+		else if(dBUserRepository.countByMail(registration.getMail()).intValue() != 0)
+			result.rejectValue("mail", null, "This mail is already used. Please input another one.");
 		
 		if (result.hasErrors()) 
 			return "registration";

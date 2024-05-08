@@ -2,14 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
-<head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-	crossorigin="anonymous">
-
-</head>
+<jsp:include page="layout/head.jsp" /> 
 <body>
 	<jsp:include page="layout/nav.jsp" />  
 
@@ -28,11 +21,11 @@
        		</div>
 			<div class="mb-3 row">
 				<div class="col-sm-4">
-				<form:select path="connection" class="form-select" aria-label="Default select example">
-				    <form:option value="NONE"> --Select account--</form:option>
-					<form:options items="${friendList}"></form:options>
-					<form:errors path = "connection" id="connection" cssClass = "invalid-feedback" />
+				<form:select path="idFriend" class="form-select" aria-label="Default select example" cssErrorClass="form-select is-invalid" >
+				    <form:option value="NONE"> --Select a friend--</form:option>
+					<form:options items="${sessionScope.friendList}"></form:options>
 				</form:select>
+				<form:errors path = "idFriend" id="idFriend" cssClass = "invalid-feedback" />
 				</div>
 				<div class="col-sm-4">
                		<form:input class="form-control" path="amount" cssErrorClass="form-control is-invalid" type="number" placeholder="0"/>

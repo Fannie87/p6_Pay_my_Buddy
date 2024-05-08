@@ -1,17 +1,8 @@
 package com.paymybuddy.model;
 
 public class Pay {
-	private Integer idUser;
-	private String connection;
+	private String idFriend;
 	private Float amount;
-
-	public Integer getIdUser() {
-		return idUser;
-	}
-
-	public void setIdUser(Integer idUser) {
-		this.idUser = idUser;
-	} 
 
 	public Float getAmount() {      
 		return amount;
@@ -21,12 +12,13 @@ public class Pay {
 		this.amount = amount;
 	}
 
-	public String getConnection() {
-		return connection;
+	public String getIdFriend() {
+		return idFriend;
 	}
 
-	public void setConnection(String connection) {
-		this.connection = connection;
+	public void setIdFriend(String idFriend) {
+		this.idFriend = idFriend;
 	}
+
 
 }

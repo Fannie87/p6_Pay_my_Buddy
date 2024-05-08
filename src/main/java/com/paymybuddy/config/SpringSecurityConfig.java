@@ -17,29 +17,24 @@ public class SpringSecurityConfig {
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
 
-//	@Bean
-//	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//		return http.authorizeHttpRequests(auth -> {
-//			auth.requestMatchers("/admin").hasRole("ADMIN");
-//			auth.requestMatchers("/user").hasRole("USER");
-//			auth.anyRequest().authenticated();
-//		}).formLogin(Customizer.withDefaults()).oauth2Login(Customizer.withDefaults()).build();
-//	}
-
-
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf() //
 				.disable() //
 				.authorizeRequests() //
-				.antMatchers("/admin/**") //
-				.hasRole("ADMIN") //
+				
 				.antMatchers("/anonymous*") //
 				.anonymous() //
+				
 				.antMatchers("/login*") //
 				.permitAll() //
+				
+				.antMatchers("/css/*") //
+				.permitAll() //
+				
 				.antMatchers("/registration*") //
 				.permitAll() //
+				
 				.anyRequest() //
 				.authenticated() //
 				.and() //
@@ -48,19 +43,13 @@ public class SpringSecurityConfig {
 					.loginProcessingUrl("/perform_login") //
 					.defaultSuccessUrl("/home", true) //
 				.and()
-					.rememberMe()
-					.key("eIxQfAVsVz")
-					.userDetailsService(customUserDetailsService)
-				// .failureUrl("/login.html?error=true")
-//	            .failureHandler(authenticationFailureHandler())
+					.rememberMe() //
+					.key("eIxQfAVsVz") //
+					.userDetailsService(customUserDetailsService) //
 				.and() //
-				.logout() //
-				.logoutUrl("/perform_logout") //
-				.deleteCookies("JSESSIONID");
-//	            .logoutSuccessHandler(logoutSuccessHandler());
-		// .and()
-		// .exceptionHandling().accessDeniedPage("/accessDenied");
-		// .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+					.logout() //
+					.logoutUrl("/perform_logout") //
+					.deleteCookies("JSESSIONID");
 		return http.build();
 	}
 

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.paymybuddy.dao.DBUser;
 import com.paymybuddy.dao.TransactionDAO;
-import com.paymybuddy.model.Account;
 import com.paymybuddy.model.Pay;
 import com.paymybuddy.model.Transaction;
 import com.paymybuddy.repository.AccountRepository;
@@ -52,7 +51,7 @@ public class TransferController {
 
 		Map<Integer, String> friendList = connectionRepository.getFriendsList(dBUser.getId());
 
-		model.addAttribute("friendList", friendList);
+		request.getSession().setAttribute("friendList", friendList);
 
 		List<TransactionDAO> transactionsDAO = transactionRepository.getTransactionsFromIdUser(dBUser.getId());
 		List<Transaction> transactions = new ArrayList<Transaction>();
@@ -69,10 +68,10 @@ public class TransferController {
 
 		request.getSession().setAttribute("transactions", transactions);
 
-		return "transfer"; 
+		return "transfer";
 	}
 
-	@PostMapping("/transfer-success")
+	@PostMapping("transfer-success")
 //	Pay = objet transmis dans formulaire, result = affiche les erreurs du formulaire,
 //	request= récupérer le mail lors de la session
 	public String payAmount(@ModelAttribute("pay") Pay pay, BindingResult result, HttpServletRequest request) {
@@ -80,8 +79,9 @@ public class TransferController {
 		if (pay.getAmount() == null)
 			result.rejectValue("amount", null, "Please enter the amount you want to transfer.");
 
-		if (pay.getConnection().isBlank())
-			result.rejectValue("nameAccount", null, "Please enter your name account.");
+		// Demande un string
+		if ("NONE".equals(pay.getIdFriend()))
+			result.rejectValue("idFriend", null, "Please select a friend.");
 
 		if (result.hasErrors())
 			return "transfer";
@@ -89,11 +89,17 @@ public class TransferController {
 		String mail = request.getUserPrincipal().getName();
 
 		DBUser dBUser = dBUserRepository.findByMail(mail);
-		Integer id = dBUser.getId();
-		Account account = new Account();
-		account.setIdUser(id);
+		TransactionDAO transaction = new TransactionDAO();
 
-		accountRepository.createAccount(account);
-		return "redirect:transfer-success";
+		//résultat de la multiplication = double, obligé de le transformer en Float (commission de -0.5% dur chaque transaction)
+		transaction.setAmount(Float.valueOf((float) (pay.getAmount() * 0.95)));
+
+		transaction.setDescription("Money send to friend");
+		transaction.setIdFriend(Integer.parseInt(pay.getIdFriend()));
+		transaction.setIdUser(dBUser.getId());
+
+		transactionRepository.createTransaction(transaction);
+
+		return "transfer-success";
 	}
 }

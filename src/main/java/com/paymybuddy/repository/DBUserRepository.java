@@ -1,5 +1,7 @@
 package com.paymybuddy.repository;
 
+import java.math.BigInteger;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -26,6 +28,12 @@ public class DBUserRepository {
 				.getSingleResult();
 	}
 	
+	public BigInteger  countByMail(String mail) {
+		return (BigInteger) entityManager //
+				.createNativeQuery("select count(*) from dbuser where mail = ?") //
+				.setParameter(1, mail) //
+				.getSingleResult();
+	}
 	@Transactional
 	public void createUser(Registration registration) {
 		String query = " INSERT INTO dbuser(mail, password, first_name, last_name) VALUES (?,?,?,?)";
@@ -33,7 +41,7 @@ public class DBUserRepository {
 		entityManager //
 				.createNativeQuery(query) //
 				.setParameter(1, registration.getMail()) //
-				.setParameter(2, bCryptPasswordEncoder.encode(registration.getPassword()))
+				.setParameter(2, bCryptPasswordEncoder.encode(registration.getPassword())) //
 				.setParameter(3, registration.getFirstName()) //
 				.setParameter(4, registration.getLastName()) //
 				.executeUpdate();
