@@ -18,10 +18,8 @@ import com.paymybuddy.dao.DBUser;
 import com.paymybuddy.dao.TransactionDAO;
 import com.paymybuddy.model.Pay;
 import com.paymybuddy.model.Transaction;
-import com.paymybuddy.repository.AccountRepository;
 import com.paymybuddy.repository.ConnectionRepository;
 import com.paymybuddy.repository.DBUserRepository;
-import com.paymybuddy.repository.PayRepository;
 import com.paymybuddy.repository.TransactionRepository;
 
 @Controller
@@ -29,12 +27,6 @@ public class TransferController {
 
 	@Autowired
 	private DBUserRepository dBUserRepository;
-
-	@Autowired
-	private AccountRepository accountRepository;
-
-	@Autowired
-	private PayRepository payRepository;
 
 	@Autowired
 	private TransactionRepository transactionRepository;
