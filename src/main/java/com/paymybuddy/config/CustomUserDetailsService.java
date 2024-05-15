@@ -2,8 +2,6 @@ package com.paymybuddy.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,8 +18,6 @@ import com.paymybuddy.repository.DBUserRepository;
 public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
 	private DBUserRepository dbUserRepository;
-	@Autowired
-	private HttpSession session;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

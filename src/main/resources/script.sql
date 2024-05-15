@@ -5,7 +5,6 @@ use pay_my_buddy;
 DROP TABLE IF EXISTS connections;
 DROP TABLE IF EXISTS account;
 DROP TABLE IF EXISTS dbuser;
-DROP TABLE IF EXISTS trade;
 DROP TABLE IF EXISTS transaction;
 
 CREATE TABLE dbuser (

@@ -39,16 +39,15 @@ public class ConnectionController {
 
 		EmailValidator emailValidator = EmailValidator.getInstance();
 
-		if (connection.getMail().isBlank()) {
+		if (connection.getMail().isBlank())
 			result.rejectValue("mail", null, "Please enter an email address");
-			return "connection";
-		}
-
-		if (!emailValidator.isValid(connection.getMail())) {
+		else if (!emailValidator.isValid(connection.getMail())) 
 			result.rejectValue("mail", null, "Not a good format");
-			return "connection";
-		}
 
+		if (result.hasErrors()) 
+			return "connection";
+		
+		
 		DBUser dBUserFriend = null;
 
 		try {
@@ -72,9 +71,9 @@ public class ConnectionController {
 			return "redirect:connection-success";
 		} else {
 			result.rejectValue("mail", null, "Mail already existing");
-			return "connection";
 		}
 
+		return "connection";
 	}
 
 //	Permet d'afficher le mail en session en cas de refresh

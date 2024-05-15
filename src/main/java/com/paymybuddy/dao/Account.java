@@ -1,4 +1,4 @@
-package com.paymybuddy.model;
+package com.paymybuddy.dao;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

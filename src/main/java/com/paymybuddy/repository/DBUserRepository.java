@@ -24,8 +24,8 @@ public class DBUserRepository {
 	public DBUser findByMail(String mail) {
 		try {
 			return (DBUser) entityManager //
-					.createNativeQuery("select * from dbuser where mail = ?", DBUser.class) //
-					.setParameter(1, mail) //
+					.createNativeQuery("select * from dbuser where mail = :mail", DBUser.class) //
+					.setParameter("mail", mail) //
 					.getSingleResult();
 		} catch (Exception e) {
 			throw e;
@@ -37,8 +37,8 @@ public class DBUserRepository {
 	public BigInteger countByMail(String mail) {
 		try {
 			return (BigInteger) entityManager //
-					.createNativeQuery("select count(*) from dbuser where mail = ?") //
-					.setParameter(1, mail) //
+					.createNativeQuery("select count(*) from dbuser where mail = :mail") //
+					.setParameter("mail", mail) //
 					.getSingleResult();
 		} catch (Exception e) {
 			throw e;
@@ -50,14 +50,14 @@ public class DBUserRepository {
 	@Transactional
 	public void createUser(Registration registration) {
 		try {
-			String query = " INSERT INTO dbuser(mail, password, first_name, last_name) VALUES (?,?,?,?)";
+			String query = " INSERT INTO dbuser(mail, password, first_name, last_name) VALUES (:mail, :password, :first_name, :last_name)";
 
 			entityManager //
 					.createNativeQuery(query) //
-					.setParameter(1, registration.getMail()) //
-					.setParameter(2, bCryptPasswordEncoder.encode(registration.getPassword())) //
-					.setParameter(3, registration.getFirstName()) //
-					.setParameter(4, registration.getLastName()) //
+					.setParameter("mail", registration.getMail()) //
+					.setParameter("password", bCryptPasswordEncoder.encode(registration.getPassword())) //
+					.setParameter("first_name", registration.getFirstName()) //
+					.setParameter("last_name", registration.getLastName()) //
 					.executeUpdate();
 		} catch (Exception e) {
 			throw e;
@@ -68,10 +68,10 @@ public class DBUserRepository {
 
 	public Float getBalance(Integer idUser) {
 		try {
-			String query = "SELECT balance FROM dbuser WHERE id = ?";
+			String query = "SELECT balance FROM dbuser WHERE id = :idUser";
 			return (Float) entityManager //
 					.createNativeQuery(query) //
-					.setParameter(1, idUser) //
+					.setParameter("idUser", idUser) //
 					.getSingleResult();
 		} catch (Exception e) {
 			throw e;
@@ -82,10 +82,10 @@ public class DBUserRepository {
 
 	public DBUser getUserById(Integer idUser) {
 		try {
-			String query = "SELECT * FROM dbuser WHERE id = ?";
+			String query = "SELECT * FROM dbuser WHERE id = :idUser";
 			return (DBUser) entityManager //
 					.createNativeQuery(query, DBUser.class) //
-					.setParameter(1, idUser) //
+					.setParameter("idUser", idUser) //
 					.getSingleResult();
 		} catch (Exception e) {
 			throw e;
@@ -97,11 +97,11 @@ public class DBUserRepository {
 	@Transactional
 	public void loadBalance(Integer idUser, Float balance) {
 		try {
-			String query = " UPDATE dbuser SET balance = ? WHERE id = ?";
+			String query = " UPDATE dbuser SET balance = :balance WHERE id = :idUser";
 			entityManager //
 					.createNativeQuery(query) //
-					.setParameter(1, balance) //
-					.setParameter(2, idUser).executeUpdate();
+					.setParameter("balance", balance) //
+					.setParameter("idUser", idUser).executeUpdate();
 		} catch (Exception e) {
 			throw e;
 		} finally {

@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.paymybuddy.model.Account;
+import com.paymybuddy.dao.Account;
 
 @Repository
 @SuppressWarnings("unchecked")
@@ -19,13 +19,14 @@ public class AccountRepository {
 
 	@Transactional
 	public void createAccount(Account account) {
-		String query = "INSERT INTO account(iban, bic, name_account, id_user) VALUES (?,?,?,?)";
+		String query = "INSERT INTO account(iban, bic, name_account, id_user) VALUES (:iban, :bic, :name_account, :id_user)";
 		try {
 			entityManager //
 					.createNativeQuery(query) //
-					.setParameter(1, account.getIban()) //
-					.setParameter(2, account.getBic()).setParameter(3, account.getNameAccount()) //
-					.setParameter(4, account.getIdUser()) //
+					.setParameter("iban", account.getIban()) //
+					.setParameter("bic", account.getBic())//
+					.setParameter("name_account", account.getNameAccount()) //
+					.setParameter("id_user", account.getIdUser()) //
 					.executeUpdate();
 		} catch (Exception e) {
 			throw e;
@@ -36,10 +37,10 @@ public class AccountRepository {
 
 	public List<Account> getAccountsFromIdUser(Integer idUser) {
 		try {
-			String query = "SELECT * from account WHERE id_user= ?";
+			String query = "SELECT * from account WHERE id_user= :id_user";
 			return entityManager //
 					.createNativeQuery(query, Account.class) //
-					.setParameter(1, idUser) //
+					.setParameter("id_user", idUser) //
 					.getResultList();
 		} catch (Exception e) {
 			throw e;
@@ -50,10 +51,10 @@ public class AccountRepository {
 
 	public Account getAccountFromId(String idAccount) {
 		try {
-			String query = "SELECT * from account WHERE id_account= ?";
+			String query = "SELECT * from account WHERE id_account= :id_account";
 			return (Account) entityManager //
 					.createNativeQuery(query, Account.class) //
-					.setParameter(1, idAccount) //
+					.setParameter("id_account", idAccount) //
 					.getSingleResult();
 		} catch (Exception e) {
 			throw e;

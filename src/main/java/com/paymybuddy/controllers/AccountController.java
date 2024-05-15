@@ -11,13 +11,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.paymybuddy.dao.Account;
 import com.paymybuddy.dao.DBUser;
-import com.paymybuddy.model.Account;
 import com.paymybuddy.repository.AccountRepository;
 import com.paymybuddy.repository.DBUserRepository;
 
 @Controller
 public class AccountController {
+
+	private static final String REGEX_IBAN = "^[A-Z]{2}(?:[ ]?[0-9]){18,20}$";
 
 	@Autowired
 	private DBUserRepository dBUserRepository;
@@ -37,6 +39,9 @@ public class AccountController {
 		if (account.getIban().isBlank())
 			result.rejectValue("iban", null, "Please enter your IBAN number");
 
+		if (account.getIban().matches(REGEX_IBAN))
+			result.rejectValue("iban", null, "Please enter a correct IBAN number (ex : FR7630001007941234567890185)");
+		
 		if (account.getBic().isBlank())
 			result.rejectValue("bic", null, "Please enter your BIC number");
 
@@ -54,15 +59,11 @@ public class AccountController {
 
 		accountRepository.createAccount(account);
 		return "redirect:account-success";
-	} 
+	}
 
 	@GetMapping(value = "/account-success")
 	public String showRegistrationSucces() {
 		return "account-success";
 	}
 
-//	@GetMapping(value = "/transfer-balance")
-//	public String showTransferBalance() {
-//		return "transfer-balance";
-//	}
 }

@@ -18,10 +18,8 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(final ViewControllerRegistry registry) {
-
         registry.addViewController("/login");
         registry.addViewController("/home");
-        registry.addViewController("/accessDenied");
     }
 
     @Bean

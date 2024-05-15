@@ -20,13 +20,14 @@ public class TransactionRepository {
 	public void createTransaction(TransactionDAO transaction) {
 		try {
 
-			String query = "INSERT INTO transaction(id_user, id_friend, description, amount) VALUES (?,?,?,?)";
+			String query = "INSERT INTO transaction(id_user, id_friend, description, amount) VALUES (:id_user, :id_friend, :description, :amount)";
 
 			entityManager //
 					.createNativeQuery(query) //
-					.setParameter(1, transaction.getIdUser()) //
-					.setParameter(2, transaction.getIdFriend()).setParameter(3, transaction.getDescription()) //
-					.setParameter(4, transaction.getAmount()) //
+					.setParameter("id_user", transaction.getIdUser()) //
+					.setParameter("id_friend", transaction.getIdFriend())//
+					.setParameter("description", transaction.getDescription()) //
+					.setParameter("amount", transaction.getAmount()) //
 					.executeUpdate();
 		} catch (Exception e) {
 			throw e;
@@ -38,10 +39,10 @@ public class TransactionRepository {
 	@Transactional
 	public List<TransactionDAO> getTransactionsFromIdUser(Integer idUser) {
 		try {
-			String query = "SELECT * from transaction WHERE id_user= ?";
+			String query = "SELECT * from transaction WHERE id_user= :id_user";
 			return entityManager //
 					.createNativeQuery(query, TransactionDAO.class) //
-					.setParameter(1, idUser) //
+					.setParameter("id_user", idUser) //
 					.getResultList();
 		} catch (Exception e) {
 			throw e;

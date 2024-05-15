@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.paymybuddy.model.Registration;
 import com.paymybuddy.repository.DBUserRepository;
 
-
 @Controller
 public class RegistrationController {  
 	

@@ -67,9 +67,17 @@ public class TransferController {
 //	Pay = objet transmis dans formulaire, result = affiche les erreurs du formulaire,
 //	request= récupérer le mail lors de la session
 	public String payAmount(@ModelAttribute("pay") Pay pay, BindingResult result, HttpServletRequest request) {
+		String mail = request.getUserPrincipal().getName();
+		DBUser dBUser = dBUserRepository.findByMail(mail);
+		Float currentBalance = dBUserRepository.getBalance(dBUser.getId());
 
 		if (pay.getAmount() == null)
 			result.rejectValue("amount", null, "Please enter the amount you want to transfer.");
+		else if (pay.getAmount() < 0)
+			result.rejectValue("amount", null, "Please enter a positive amount.");
+		else if (pay.getAmount() > currentBalance)
+			result.rejectValue("amount", null,
+					"Your current balance is " + currentBalance + ". You don't have enough money!");
 
 		// Demande un string
 		if ("NONE".equals(pay.getIdFriend()))
@@ -78,12 +86,10 @@ public class TransferController {
 		if (result.hasErrors())
 			return "transfer";
 
-		String mail = request.getUserPrincipal().getName();
-
-		DBUser dBUser = dBUserRepository.findByMail(mail);
 		TransactionDAO transaction = new TransactionDAO();
 
-		//résultat de la multiplication = double, obligé de le transformer en Float (commission de -0.5% dur chaque transaction)
+		// résultat de la multiplication = double, obligé de le transformer en Float
+		// (commission de -0.5% dur chaque transaction)
 		transaction.setAmount(Float.valueOf((float) (pay.getAmount() * 0.95)));
 
 		transaction.setDescription("Money send to friend");
@@ -91,6 +97,9 @@ public class TransferController {
 		transaction.setIdUser(dBUser.getId());
 
 		transactionRepository.createTransaction(transaction);
+
+		Float newBalance = currentBalance - pay.getAmount();
+		dBUserRepository.loadBalance(dBUser.getId(), newBalance);
 
 		return "transfer-success";
 	}

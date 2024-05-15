@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.paymybuddy.dao.Account;
 import com.paymybuddy.dao.DBUser;
 import com.paymybuddy.dao.TransactionDAO;
-import com.paymybuddy.model.Account;
 import com.paymybuddy.model.ProfileAmount;
 import com.paymybuddy.repository.AccountRepository;
 import com.paymybuddy.repository.DBUserRepository;
@@ -31,7 +31,7 @@ public class ProfileController {
 
 	@Autowired
 	private AccountRepository accountRepository;
-	
+
 	@Autowired
 	private TransactionRepository transactionRepository;
 
@@ -46,10 +46,9 @@ public class ProfileController {
 		List<Account> accounts = accountRepository.getAccountsFromIdUser(dBUser.getId());
 
 		Map<String, String> mapAccounts = new HashMap<String, String>();
-		for (Account account : accounts) {
+		for (Account account : accounts)
 			mapAccounts.put(account.getIdAccount().toString(), account.getNameAccount());
-		}
-
+		
 		request.getSession().setAttribute("mapAccounts", mapAccounts);
 		request.getSession().setAttribute("balance", dBUser.getBalance());
 
@@ -66,7 +65,7 @@ public class ProfileController {
 
 		if (profileAmountSupply.getBalance() == null)
 			result.rejectValue("balance", null, "Please enter the amount you want to supply in Pay my Buddy.");
-		else if(!NumberUtils.isCreatable(profileAmountSupply.getBalance()))
+		else if (!NumberUtils.isCreatable(profileAmountSupply.getBalance()))
 			result.rejectValue("balance", null, "Please enter a positive amount.");
 		else {
 			Float balance = Float.parseFloat(profileAmountSupply.getBalance());
@@ -111,7 +110,7 @@ public class ProfileController {
 
 		return "profile-success";
 	}
-	
+
 	@PostMapping("/debit-success")
 	public String transferAmount(@ModelAttribute("profileAmountDebit") ProfileAmount profileAmountDebit,
 			BindingResult result, HttpServletRequest request, Model model) {
@@ -119,7 +118,7 @@ public class ProfileController {
 
 		if (profileAmountDebit.getBalance() == null)
 			result.rejectValue("balance", null, "Please enter the amount you want to transfer to your bank account.");
-		else if(!NumberUtils.isCreatable(profileAmountDebit.getBalance()))
+		else if (!NumberUtils.isCreatable(profileAmountDebit.getBalance()))
 			result.rejectValue("balance", null, "Please enter a positive amount.");
 		else {
 			Float balance = Float.parseFloat(profileAmountDebit.getBalance());
@@ -145,7 +144,7 @@ public class ProfileController {
 		Float inputBalance = Float.parseFloat(profileAmountDebit.getBalance());
 		dBUserRepository.loadBalance(dBUser.getId(), balanceAmount - inputBalance);
 		String nameAccount = accountRepository.getAccountFromId(profileAmountDebit.getIdAccount()).getNameAccount();
-		
+
 		TransactionDAO transaction = new TransactionDAO();
 		transaction.setAmount(inputBalance);
 		transaction.setDescription("Debit balance from Pay my Buddy. account : " + nameAccount);
@@ -156,6 +155,4 @@ public class ProfileController {
 		return "redirect:profile-success";
 	}
 
-	
 }
-

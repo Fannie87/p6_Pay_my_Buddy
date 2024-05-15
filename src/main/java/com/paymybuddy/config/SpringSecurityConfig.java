@@ -22,30 +22,27 @@ public class SpringSecurityConfig {
 		http.csrf() //
 				.disable() //
 				.authorizeRequests() //
-				
-				.antMatchers("/anonymous*") //
-				.anonymous() //
-				
+				//
 				.antMatchers("/login*") //
 				.permitAll() //
-				
-				.antMatchers("/css/*") //
-				.permitAll() //
-				
+				//
 				.antMatchers("/registration*") //
 				.permitAll() //
-				
+				//
 				.anyRequest() //
 				.authenticated() //
+				//
 				.and() //
 					.formLogin() //
 					.loginPage("/login") //
 					.loginProcessingUrl("/perform_login") //
 					.defaultSuccessUrl("/home", true) //
+				//
 				.and()
 					.rememberMe() //
 					.key("eIxQfAVsVz") //
 					.userDetailsService(customUserDetailsService) //
+				//
 				.and() //
 					.logout() //
 					.logoutUrl("/perform_logout") //
