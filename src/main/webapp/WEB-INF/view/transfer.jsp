@@ -28,7 +28,7 @@
 				<form:errors path = "idFriend" id="idFriend" cssClass = "invalid-feedback" />
 				</div>
 				<div class="col-sm-4">
-               		<form:input class="form-control" path="amount" cssErrorClass="form-control is-invalid" type="number" placeholder="0"/>
+               		<form:input class="form-control" path="amount" cssErrorClass="form-control is-invalid" type="number" placeholder="0" min="0" />
                		<form:errors path = "amount" id="amount" cssClass = "invalid-feedback"/>
               	</div>
 				<div class="col-sm-2">
